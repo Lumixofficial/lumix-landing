@@ -1,0 +1,8 @@
+node_modules
+.next
+.next16
+out
+*.tsbuildinfo
+.env.local
+reference-unpacked.html
+.impeccable-*.png
