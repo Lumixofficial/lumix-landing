@@ -62,9 +62,10 @@ const desktop = await evaluate(`(() => ({
   }))
 }))()`);
 if (!desktop.lenis || !desktop.rootIsDocument || desktop.scrollbarWidth !== "none") throw new Error("Desktop scroll setup is incorrect");
-if (desktop.footer.length !== 6 || desktop.footer.some((item) => item.cursor !== "pointer" || item.width < 36 || item.height < 36)) throw new Error("Footer hit areas are incorrect");
+if (desktop.footer.length !== 7 || desktop.footer.some((item) => item.cursor !== "pointer" || item.width < 36 || item.height < 36)) throw new Error("Footer hit areas are incorrect");
 if (desktop.footer.slice(0, 5).some((item) => item.tag !== "button" || item.href !== null)) throw new Error("Unassigned footer destinations are not buttons");
 if (desktop.footer[5].tag !== "a" || desktop.footer[5].href !== "#how-it-works") throw new Error("Docs link is incorrect");
+if (desktop.footer[6].tag !== "a" || desktop.footer[6].href !== "mailto:info@lumixmarket.com") throw new Error("Contact email link is incorrect");
 
 await call("Input.dispatchMouseEvent", { type: "mouseWheel", x: 720, y: 450, deltaX: 0, deltaY: 540 });
 await wait(60);
@@ -100,7 +101,7 @@ async function pressDemo(selector) {
     const el = document.querySelector('${selector}');
     el.scrollIntoView({ block: 'center' });
     const r = el.getBoundingClientRect();
-    return { x: r.left + r.width / 2, y: r.top + r.height / 2, before: getComputedStyle(el).transform, href: el.getAttribute('href') };
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2, before: getComputedStyle(el).transform, href: el.getAttribute('href'), target: el.getAttribute('target'), rel: el.getAttribute('rel'), label: el.textContent.trim() };
   })()`);
   await wait(180);
   const actual = await evaluate(`(() => { const r = document.querySelector('${selector}').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; })()`);
@@ -112,7 +113,7 @@ async function pressDemo(selector) {
   await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: 2, y: 2, button: "left", buttons: 0, clickCount: 1 });
   await wait(130);
   const released = await evaluate(`getComputedStyle(document.querySelector('${selector}')).transform`);
-  if (position.href !== "mailto:info@lumixmarket.com" || pressed !== "matrix(1, 0, 0, 1, 0, 4)" || released !== "none") throw new Error(`${selector} press effect is incorrect`);
+  if (position.href !== "https://app.lumixmarket.com" || position.target !== "_blank" || position.rel !== "noopener noreferrer" || position.label !== "Launch app" || pressed !== "matrix(1, 0, 0, 1, 0, 4)" || released !== "none") throw new Error(`${selector} press effect is incorrect`);
   return { pressed, released };
 }
 const heroPress = await pressDemo(".hero .demo-button");

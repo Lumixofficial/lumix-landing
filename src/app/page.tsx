@@ -6,8 +6,8 @@ import { footerLinks } from "./links";
 import ScrollReveals from "./ScrollReveals";
 import HeroVisual from "./HeroVisual";
 
-function DemoButton() {
-  return <a className="trade-button trade-button--primary trade-button--lg demo-button" href="mailto:info@lumixmarket.com">Contact us</a>;
+function LaunchAppButton() {
+  return <a className="trade-button trade-button--primary trade-button--lg demo-button" href="https://app.lumixmarket.com" target="_blank" rel="noopener noreferrer">Launch app</a>;
 }
 
 function SocialIcon({ name }: { name: "github" | "x" | "discord" }) {
@@ -39,6 +39,7 @@ function Footer() {
             <FooterLink href={footerLinks.terms} label="Terms">Terms</FooterLink>
             <FooterLink href={footerLinks.privacy} label="Privacy">Privacy</FooterLink>
             <FooterLink href={footerLinks.docs} label="Docs / How it works">Docs / How it works</FooterLink>
+            <FooterLink href="mailto:info@lumixmarket.com" label="Email info@lumixmarket.com">info@lumixmarket.com</FooterLink>
           </div>
           <span className="copyright">© 2026 Lumix</span>
         </div>
@@ -58,7 +59,7 @@ export default function Home() {
             <div className="hero-copy">
               <h1 className="hero-rise hero-rise--headline" id="hero-title">Trade on Stellar with <span>Lumix.</span></h1>
               <p className="hero-detail hero-rise hero-rise--detail">Options, perpetuals, spot swaps, and Earn in one place. Trade your way or put your assets to work.</p>
-              <div className="hero-action hero-rise hero-rise--action"><DemoButton /></div>
+              <div className="hero-action hero-rise hero-rise--action"><LaunchAppButton /></div>
             </div>
             <HeroVisual />
           </div>
@@ -152,7 +153,7 @@ export default function Home() {
             <h2 data-reveal-item id="closing-title">Explore Lumix <span>up close.</span></h2>
             <p data-reveal-item>See how you can trade and earn with Lumix in a private demo.</p>
           </div>
-          <DemoButton />
+          <LaunchAppButton />
         </section>
       </main>
       <Footer />
