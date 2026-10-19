@@ -1,0 +1,16 @@
+services:
+  lumix-landing:
+    image: lumix-landing:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        LUMIX_GITHUB_URL: ${LUMIX_GITHUB_URL:-}
+        LUMIX_X_URL: ${LUMIX_X_URL:-}
+        LUMIX_DISCORD_URL: ${LUMIX_DISCORD_URL:-}
+        LUMIX_TERMS_URL: ${LUMIX_TERMS_URL:-}
+        LUMIX_PRIVACY_URL: ${LUMIX_PRIVACY_URL:-}
+        LUMIX_DOCS_URL: ${LUMIX_DOCS_URL:-}
+    ports:
+      - "127.0.0.1:3003:3000"
+    restart: unless-stopped

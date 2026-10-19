@@ -1,0 +1,10 @@
+node_modules
+.next
+.next16
+.git
+.gitignore
+*.patch
+.env*.local
+README.md
+playwright-report
+test-results
